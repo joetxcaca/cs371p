@@ -56,4 +56,7 @@ Zoom
 Specifications Grading
 	please ask about this if you don't undestand it
 	please use the Google Sheet that we're providing to track your grades
+
+Website
+	https://www.cs.utexas.edu/users/downing/cs371p/Schedule.html
 */
