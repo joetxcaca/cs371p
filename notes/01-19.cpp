@@ -18,13 +18,13 @@ Help Sessions
 
 Office Hours
 	Glenn Downing
-		Th 3-4 pm
+		Th 3-4 pm, Zoom
 
 	Philo Lin (undergrad, '23)
 		TBD
 
 	Serdjan Rolovic (grad, '22)
-		TBD
+		Th 2-3 pm, Zoom
 
 Canvas
 	personal questions
