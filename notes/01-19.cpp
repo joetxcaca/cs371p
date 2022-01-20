@@ -4,7 +4,7 @@
 
 /*
 Class Modality
-	first two weeks on Zoom, you're welcome to go to physical room
+	first two weeks on Zoom, you're welcome to go to physical room (JGB 2.218)
 
 Cold Calling
 	you're only called ONCE per rotation
@@ -43,7 +43,7 @@ GitLab, like GitHub, do a git clone, later git pull, on	 a regular basis
 HackerRank, competitive programming platform
 	exercises
 
-Perusall, collaborative annotation tool
+Perusall, collaborative annotation tool (you must go through the Canvas assignment)
 	annotate a series of papers
 	the first one will be the syllabus
 
@@ -79,6 +79,19 @@ Getting to know someone
 
 
 
+UTCS 371p Discord
+
+
+
+
+
+UTCS
+https://discord.gg/dGgwzpM3
+
+
+
+
+
 UT Programming Contest (UTPC)
 Association of Computing Machinery (ACM) is 80 years old
 International Collegiate Programming Contest (ICPC) is 40 years old
@@ -89,20 +102,21 @@ around 110 regions around the world
 our regional contest: South Central USA
 around 65 teams, 25 schools, 3 states
 we send 4 teams
-2014: 2, M
-2015, 2, T
-2016: 1, So
-2017: 1, Be
-2018: 1, Po
-2019: 1, Mo
-2020: -, Ba
+2014: 2nd, Rice (1st), Morocco
+2015, 2nd, Rice (1st), Thailand, all 4 teams were in the top 7 of the 65 teams
+2016: 1st, 2nd, 3rd, 4th, South Dakota
+2017: 1st, Bejing
+2018: 1st, Portugal
+2019: 1st, Moscow (had to do remote because of COVID)
+2020: -, Bangladesh
+2021: -, TBD
 
 https://www.cs.utexas.edu/users/utpc/
 https://discord.gg/hjQAveZ
 
 CS 104c: Competitive Programming
 https://www.cs.utexas.edu/users/downing/cs104c/
-weekly, Fridays, 2 pm, GDC 1.304
+weekly, Fridays, 2 pm, GDC 1.304 (first two weeks on Zoom)
 
 
 
@@ -111,12 +125,12 @@ weekly, Fridays, 2 pm, GDC 1.304
 UT Chess
 https://www.sites.utexas.edu/utchessclub/
 https://discord.gg/f2eMxzW
-weekly, Mondays, 6 pm, Dobie Food Court
+weekly, Mondays, 6 pm, Dobie Food Court (first two weeks on Zoom)
 
 
 
 
 
 Google "cs371p fall 2021 final entry"
-Perusall Syllabus assignment
+Perusall Syllabus assignment (go to the Canvas assignment)
 */
