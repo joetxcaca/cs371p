@@ -123,7 +123,7 @@ weekly, Fridays, 2 pm, GDC 1.304 (first two weeks on Zoom)
 
 
 UT Chess
-https://www.sites.utexas.edu/utchessclub/
+https://sites.utexas.edu/utchessclub/
 https://discord.gg/f2eMxzW
 weekly, Mondays, 6 pm, Dobie Food Court (first two weeks on Zoom)
 
