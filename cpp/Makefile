@@ -70,6 +70,8 @@ sync:
 	make clean
 	@echo ~/examples/cpp/
 	@rsync -p -r -t -u -v --delete         \
+    --include "Dockerfile"                 \
+    --include "Script.txt"                 \
     --include "Hello.cpp"                  \
     --exclude "*"                          \
     ~/examples/cpp/ .

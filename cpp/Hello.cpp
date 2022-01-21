@@ -2,9 +2,9 @@
 // Hello.cpp
 // ---------
 
-// https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines.html
 // https://en.cppreference.com
 // https://en.cppreference.com/w/cpp/io
+// https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines.html
 
 #include <iostream> // cout, endl
 
@@ -27,17 +27,20 @@ C++23
 
 
 
-% which g++-11
-/usr/local/bin/g++-11
+% which clang++
+/usr/bin/clang++
 
 
 
-% g++-11 --version
-g++-11 (Homebrew GCC 11.1.0_1) 11.1.0
+% clang++ --version
+Apple clang version 13.0.0 (clang-1300.0.29.30)
+Target: x86_64-apple-darwin21.2.0
+Thread model: posix
+InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
 
 
 
-% g++-11 -pedantic -std=c++17 -O3 -Wall Hello.cpp -o Hello
+% clang++ -g -std=c++17 -Wall -Wextra -Wpedantic Hello.cpp -o Hello
 
 
 

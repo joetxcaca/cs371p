@@ -66,5 +66,5 @@ Discord
 
 /*
 Discord: please change your server name to your full name
-Perusall: syllabus assignment
+Perusall: syllabus assignment (answer questions)
 */
