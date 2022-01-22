@@ -64,3 +64,8 @@ Discord
 	https://discord.gg/Qd3DVQZG
 */
 
+/*
+cold calling
+specifications grading
+very much a C++ class
+*/
