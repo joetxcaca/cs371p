@@ -62,10 +62,21 @@ Website
 
 Discord
 	https://discord.gg/Qd3DVQZG
+
+Grades Tracker Google Sheet
+	https://docs.google.com/spreadsheets/d/1nt_FXi5vYuZlsxTPnanItjcivtZy8Gu4AADpPsdBWhM/
+
+Virtual Token Google Form
 */
 
 /*
 cold calling
 specifications grading
 very much a C++ class
+*/
+
+/*
+Google Sheet: grades tracker
+Google Form: virtual tokens
+Twitter: #utcsoopswe
 */

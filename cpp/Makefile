@@ -36,7 +36,8 @@ else
 endif
 
 FILES :=                    \
-    Hello
+    Hello                   \
+    Assertions
 
 %: %.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@ $(LDFLAGS)
@@ -73,6 +74,7 @@ sync:
     --include "Dockerfile"                 \
     --include "Script.txt"                 \
     --include "Hello.cpp"                  \
+    --include "Assertions.cpp"             \
     --exclude "*"                          \
     ~/examples/cpp/ .
 	@echo ~/exercises/cpp/
