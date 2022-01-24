@@ -36,8 +36,7 @@ else
 endif
 
 FILES :=                    \
-    Hello                   \
-    Assertions
+    Hello
 
 %: %.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@ $(LDFLAGS)
