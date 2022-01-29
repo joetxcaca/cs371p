@@ -80,3 +80,7 @@ very much a C++ class
 Paper #02: Makefile
 remember to go to Perusall THROUGH Canvas
 */
+
+/*
+Project #1: Collatz
+*/
