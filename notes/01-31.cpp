@@ -14,7 +14,7 @@ Lectures
 	MWF 1 pm
 
 Help Sessions
-	W 6-8 pm
+	W 5-7 pm
 
 Office Hours
 	Glenn Downing

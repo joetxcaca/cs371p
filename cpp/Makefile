@@ -36,7 +36,11 @@ else
 endif
 
 FILES :=                    \
-    Hello
+    Hello                   \
+    UnitTests3              \
+    Coverage1               \
+    Coverage2               \
+    Coverage3
 
 %: %.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@ $(LDFLAGS)
@@ -74,6 +78,12 @@ sync:
     --include "Script.txt"                 \
     --include "Hello.cpp"                  \
     --include "Assertions.cpp"             \
+    --include "UnitTests1.cpp"             \
+    --include "UnitTests2.cpp"             \
+    --include "UnitTests3.cpp"             \
+    --include "Coverage1.cpp"              \
+    --include "Coverage2.cpp"              \
+    --include "Coverage3.cpp"              \
     --exclude "*"                          \
     ~/examples/cpp/ .
 	@echo ~/exercises/cpp/
