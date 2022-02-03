@@ -67,7 +67,7 @@ Grades Tracker Google Sheet
 	https://docs.google.com/spreadsheets/d/1nt_FXi5vYuZlsxTPnanItjcivtZy8Gu4AADpPsdBWhM/
 
 Virtual Token Google Form
-	https://docs.google.com/forms/d/1paG6AnfFj_NtSWUai-mKBFdG8mw-JsxNgPfsI79p9QI/
+	https://forms.gle/yoiKV2Vw1cSWbxBQ7
 */
 
 /*
