@@ -80,24 +80,3 @@ very much a C++ class
 Paper #03: Continuous Integration
 remember to go to Perusall THROUGH Canvas
 */
-
-/*
-Project #1: Collatz
-Poll: Project #1: Collatz
-Academic Integrity Quiz
-
-Add
-SHELL := /bin/bash
-to the Makefile.
-
-.gitlab-ci.yml
-make run-all
-*/
-
-/*
-virtual tokens
-*/
-
-/*
-Quiz #7
-*/
