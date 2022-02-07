@@ -40,7 +40,9 @@ FILES :=                    \
     UnitTests3              \
     Coverage1               \
     Coverage2               \
-    Coverage3
+    Coverage3               \
+    IsPrimeT                \
+    Exceptions
 
 %: %.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@ $(LDFLAGS)
@@ -84,10 +86,13 @@ sync:
     --include "Coverage1.cpp"              \
     --include "Coverage2.cpp"              \
     --include "Coverage3.cpp"              \
+    --include "Exceptions.cpp"             \
     --exclude "*"                          \
     ~/examples/cpp/ .
 	@echo ~/exercises/cpp/
 	@rsync -p -r -t -u -v --delete         \
+    --include "IsPrimeH.cpp"               \
+    --include "IsPrimeT.cpp"               \
     --exclude "*"                          \
     ~/exercises/cpp/ .
 

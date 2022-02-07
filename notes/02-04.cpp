@@ -89,5 +89,12 @@ Academic Integrity Quiz
 Add
 SHELL := /bin/bash
 to the Makefile.
+
+.gitlab-ci.yml
+make run-all
+*/
+
+/*
+virtual tokens
 */
 
