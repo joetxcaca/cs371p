@@ -1,5 +1,5 @@
 // -----------
-// Fri, 11 Feb
+// Mon, 14 Feb
 // -----------
 
 /*
@@ -81,89 +81,3 @@ Paper #4: 2022-02-13: Pair Programming
 remember to go to Perusall THROUGH Canvas
 */
 
-/*
-first competitive programming contest
-Fri, 11 Feb, 5:30 - 8 pm CT
-Zoom or GDC auditorium
-free food!
-*/
-
-/*
-two tokens:   *, &
-two contexts: next to a variable, next to a type
-*/
-
-int i = 2;
-int j = i; // making a copy
-++i;
-cout << j; // 2
-
-int* p = i;  // no
-int* p = &i; // & takes the address
-++p;         // legal to point to a crazy place
-cout << *p;  // * dereferences a pointer
-cout << *i;  // no
-
-int* q = &i;
-++*q;        // dereferences and increments
-
-// -----------
-// StrCmpH.cpp
-// -----------
-
-// https://en.cppreference.com/w/c/string/byte/strcmp
-// https://gcc.gnu.org/onlinedocs/gcc-10.2.0/libstdc++/api/a00332_source.html
-
-#include <cassert>  // assert
-#include <iostream> // cout, endl
-
-using namespace std;
-
-#define TEST0
-#define TEST1
-#define TEST2
-#define TEST3
-#define TEST4
-#define TEST5
-
-#ifdef TEST0
-void test0 () {
-    assert(my_strcmp("",    "")    == 0);}
-#endif
-
-int my_strcmp (const char* s, const char* t) {
-	...}
-
-/*
-turn on your video
-collaborate on solving
-ONE person volunteers to drive, share their screen
-ask for help or when you're done before you submit
-*/
-
-5182
-
-#ifdef TEST1
-void test1 () {
-    assert(my_strcmp("abc", "abc") == 0);}
-#endif
-
-#ifdef TEST2
-void test2 () {
-    assert(my_strcmp("abc", "ab")  >  0);}
-#endif
-
-#ifdef TEST3
-void test3 () {
-    assert(my_strcmp("abc", "aba") >  0);}
-#endif
-
-#ifdef TEST4
-void test4 () {
-    assert(my_strcmp("ab",  "abc") <  0);}
-#endif
-
-#ifdef TEST5
-void test5 () {
-    assert(my_strcmp("aba", "abc") <  0);}
-#endif
