@@ -42,7 +42,8 @@ FILES :=                    \
     Coverage2               \
     Coverage3               \
     IsPrimeT                \
-    Exceptions
+    Exceptions              \
+    StrCmpT
 
 %: %.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@ $(LDFLAGS)
@@ -91,8 +92,8 @@ sync:
     ~/examples/cpp/ .
 	@echo ~/exercises/cpp/
 	@rsync -p -r -t -u -v --delete         \
-    --include "IsPrimeH.cpp"               \
     --include "IsPrimeT.cpp"               \
+    --include "StrCmpT.cpp"                \
     --exclude "*"                          \
     ~/exercises/cpp/ .
 
