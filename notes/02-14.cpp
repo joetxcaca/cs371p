@@ -81,3 +81,137 @@ Paper #4: 2022-02-13: Pair Programming
 remember to go to Perusall THROUGH Canvas
 */
 
+/*
+two tokens:   *, &
+two contexts: modifying a variable, modifying a type
+*/
+
+int  i = 2;
+int* p = i;  // no
+int* p = &i;
+int* p = &2; // no
+
+/*
+what are the constraints on &
+	l-value
+*/
+
+int i = 2;
+int j = 3;
+int k = (i + j);
+k = (i + j);
+(i + j) = k; // no, because (i + j) is an r-value
+
+/*
+an r-value can be on the right hand side of assignment, but NOT the left
+an l-value can be on both sides
+
+the l-value is the stronger of the two
+l-values can have their address taken
+r-values can not
+*/
+
+k = (2 + 3);
+
+/*
++ operator
+	takes two r-values
+	returns an r-value
+	it does NOT have any side effects
+	returns the sum
+*/
+
+i + j; // at least meaningless
+
+int i = 2;
+int j = 3;
+i += j;    // modifying i, but not j
+i += 2;    // yes
+2 += j;    // no
+
+int k = (i += j); // yes for C, C++; Java, no for Python
+
+/*
++= operator
+	takes an l-value on the left, an r-value on the right
+	returns an l-value, returns the incoming left hand side
+	it does have side effect changing the left hand side
+*/
+
+/*
+as a counter example, in Python, operators that have side effects return NOTHING
+*/
+
+(i += j) = k; // yes for C++; no for C, Java, Python
+
+i += j;
+i =  k;
+
+i << j; // does not modify i
+
+/*
+what operators are like +:
+	- (unary, binary), *, /, %, <<, >>, &&, ||, &, |, ~ (unary), ^, <, >, <=, >=, ==, !=
+
+like +=
+	-=, *=, /=, %=, <<=, >>=, &=, |=
+*/
+
+int i = 2;
+int j = ++i;
+int j = ++2; // no
+cout << i;   // 3
+cout << j;   // 3
+
+++i = j; // yes in C++, no in C, Java, Python
+
+/*
+++ (pre-increment)
+	takes an l-value
+	returns an l-value
+	it does have a side effect
+*/
+
+int i = 2;
+int j = i++;
+int j = 2++; // no
+cout << i;   // 3
+cout << j;   // 2
+
+f(i++); // post-increment must create a copy, inherently more expensive than pre-increment
+
+i++ = j; // no in C++, C, Java, Python
+
+/*
+++ (post-increment)
+	takes an l-value
+	returns an r-value
+	it does have a side effect
+*/
+
+int i = 2;
+int j = ++++i;
+cout << i;     // 4
+cout << j;     // 4
+
+int i = 2;
+int j = i++++; // no
+
+int k = ++i++; // no, post has a higher precedence than the pre
+
+for (int i = 0; i < s; i++) { // for ints, doesn't matter pre or post is fine
+	...}
+
+{
+int i = 0;
+while (i < s) {
+	...
+	i++;}
+}
+
+for (T i = 0; i < s; i++) { // for user-defined type, pre is important
+	...}
+
+/*
+stop worrying, and always use pre
+*/
