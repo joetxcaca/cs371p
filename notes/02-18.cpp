@@ -1,5 +1,5 @@
 // -----------
-// Wed, 16 Feb
+// Fri, 18 Feb
 // -----------
 
 /*
@@ -84,50 +84,3 @@ this is the first of a 5-paper series
 SOLID design
 */
 
-k = (i += j); // yes in C, C++, Java; no in Python
-
-(i += j) = k; // yes in C++, no in C, Java, Python
-
-/*
-write a program that ONLY handles the input correctly
-write the simplest possible solution, ONE bucket
-bucket for each candidate
-*/
-
-2 // the number of test cases
-  // blank line
-3             // the number of candidates
-John Doe      // the names of the candidates
-Jane Smith
-Sirhan Sirhan
-1 2 3         // the ballots of the voters
-2 1 3
-2 3 1
-1 2 3
-3 1 2
-              // blank line
-3
-John Doe
-Jane Smith
-Sirhan Sirhan
-1 2 3
-2 1 3
-2 3 1
-1 2 3
-3 1 2
-              // NO blank line, EOF instead
-
-/*
-1. count the 1st preferences
-2. does any candidate have a majority, if yes, we have a winner
-3. is there a tie among all of the candidates, if yes, we have many winners
-4. identify the candidates that are tied for last
-       revisit the ballots of those losers
-       consider the next preference on those ballots
-	   start over again
-*/
-
-/*
-a test case ends in a blank line
-the last test case ends in EOF
-*/
