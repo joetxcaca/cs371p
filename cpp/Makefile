@@ -43,7 +43,8 @@ FILES :=                    \
     Coverage3               \
     IsPrimeT                \
     Exceptions              \
-    StrCmpT
+    StrCmpT                 \
+    Variables
 
 %: %.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@ $(LDFLAGS)
@@ -88,6 +89,7 @@ sync:
     --include "Coverage2.cpp"              \
     --include "Coverage3.cpp"              \
     --include "Exceptions.cpp"             \
+    --include "Variables.cpp"              \
     --exclude "*"                          \
     ~/examples/cpp/ .
 	@echo ~/exercises/cpp/
