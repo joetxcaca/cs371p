@@ -175,4 +175,4 @@ void test4 () {
     assert(*r == 3);
     assert(&r == &p);} // r and p are two names for the same location in memory
 
-	cout << (&p == &i) // no; type of the left: int**; type of the right: int*
+    cout << (&p == &i) // no; type of the left: int**; type of the right: int*
