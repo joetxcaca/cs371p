@@ -96,8 +96,248 @@ best to remove make run-all from .gitlab-ci.yml, until you're really done
 */
 
 /*
-arguments
-catch by reference
-returns
+values
+pointers
+references
 */
 
+void f (int v) { // pass by value, we're making a copy
+	++v;}
+
+int i = 2;
+f(i);
+cout << i; // 2
+
+
+
+void g (int* p) { // pass by address, p is a pointer to j
+	++p;}
+
+int j = 3;
+g(j);      // no
+g(&j);
+cout << j; // 3
+
+
+
+void g (int* p) { // pass by address, p is a pointer to j
+	++*p;
+	int k = 4;
+	p = &k;
+	++*p;         // modifying k
+	...}
+
+int j = 3;
+g(j);      // no
+g(&j);
+cout << j; // 4
+
+
+
+void h (int& r) { // pass by reference, r IS k
+	++*r;         // no
+	++r;}
+
+int k = 4;
+h(&k);     // no
+h(k);
+cout << k; // 5
+
+
+
+int  i = 2;
+int* p = &i;
+++*p;
+cout << i; // 3
+int k = 4;
+p = &k;    // make p point other places
+
+int  j = 3;
+int& r = 5; // no, int& needs an l-value
+int& r = j; // r becomes an alias for j
+++r;
+cout << j; // 4
+// there is NO way to disconnect r from j
+int m = 5;
+r = m;     // changing j to have the value m
+
+
+
+/*
+three annotations
+	1. the call
+	2. the parameter
+	3. the use
+*/
+
+void g (int* p) { // pass by address, p is a pointer to j
+			      // paranoid that p might be 0 or the nullptr
+	++*p;}
+
+int j = 3;
+g(&j);
+cout << j;  // 4
+g(0);       // runtime error
+// the right way to do that
+g(nullptr);
+
+
+/*
+one annotation
+	1. the parameter
+*/
+
+void h (int& r) { // pass by reference, r IS k
+	++r;}
+
+int k = 4;
+h(k);      // this call is a little more opaque
+cout << k; // 5
+h(0);      // no
+
+/*
+reasons for passing address:
+	1. I want the pointer argument to take on various values
+	2. I'm handing an array
+*/
+
+// -------------
+// Arguments.cpp
+// -------------
+
+#include <cassert>  // assert
+#include <iostream> // cout, endl
+
+using namespace std;
+
+void by_value (int v) { // making a copy
+    ++v;}
+
+void test1 () {
+    const int i = 2;
+    by_value(i);
+    assert(i == 2);}
+
+
+
+void by_address (int* p) {
+    assert(p);
+    ++*p;}
+
+void test2 () {
+    int j = 3;
+    by_address(&j);
+    assert(j == 4);
+    const int cj = 5;
+//  by_address(&cj);  // error: invalid conversion from 'const int*' to 'int*' [-fpermissive]
+//  by_address(185);  // error: invalid conversion from 'int' to 'int*' [-fpermissive]
+//  by_address(0);    // Assertion failed: (p), function by_address, file Arguments.cpp, line 14.
+    }
+
+
+
+void by_reference (int& r) { // must be an l-value!!!
+    ++r;}
+
+void test3 () {
+    int k = 4;
+    by_reference(k);
+    assert(k == 5);
+    const int ck = 6;
+//  by_reference(ck);  // error: binding reference of type 'int&' to 'const int' discards qualifiers
+//  by_reference(185); // error: cannot bind non-const lvalue reference of type 'int&' to an rvalue of type 'int'
+//  by_reference(0);   // error: cannot bind non-const lvalue reference of type 'int&' to an rvalue of type 'int'
+    }
+
+
+
+int main () {
+    cout << "Arguments.cpp" << endl;
+    test1();
+    test2();
+    test3();
+    cout << "Done." << endl;
+    return 0;}
+
+
+
+
+// -----------
+// Returns.cpp
+// -----------
+
+#include <cassert>  // assert
+#include <iostream> // cout, endl
+
+int f () {          // return by value
+    int i = 2;
+    return i;}      // a copy i
+
+void test1 () {
+    int v = f();
+    assert(v == 2);
+//  int* p = &f();  // error: lvalue required as unary ‘&’ operand
+//  int& r = f();   // error: invalid initialization of non-const reference of type ‘int&’ from a temporary of type ‘int’
+    }
+
+
+
+int* g () {          // return by address
+    int j = 2;
+    return &j;}      // warning: address of local variable 'j' returned
+
+void test2 () {
+//  int v = *g();    // Segmentation fault
+
+    int* p = g();
+//  assert(*p == 2); // Segmentation fault
+
+    int& r = *g();
+//  assert(r == 2);  // Segmentation fault
+    }
+
+
+
+int& h () {          // return by reference
+    int k = 2;
+    return k;}       // warning: reference to local variable 'k' returned
+
+void test3 () {
+//  int v = h();     // Segmentation fault
+
+    int* p = &h();
+//  assert(*p == 2); // Segmentation fault
+
+    int& r = h();
+//  assert(r == 2);  // Segmentation fault
+    }
+
+int main () {
+    using namespace std;
+    cout << "Returns.cpp" << endl;
+    test1();
+    test2();
+    test3();
+    cout << "Done." << endl;
+    return 0;}
+
+
+/*
+you need to be confident about
+	1. values
+	2. pointers
+	3. references
+
+in three contexts:
+	1. top level
+	2. arguments
+	3. returns
+*/
+
+cout << "hi" << "badr";
+
+// what exactly
+
+cout << "hi"
+
+// returning by reference

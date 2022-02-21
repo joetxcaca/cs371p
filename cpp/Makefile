@@ -90,6 +90,8 @@ sync:
     --include "Coverage3.cpp"              \
     --include "Exceptions.cpp"             \
     --include "Variables.cpp"              \
+    --include "Arguments.cpp"              \
+    --include "Returns.cpp"                \
     --exclude "*"                          \
     ~/examples/cpp/ .
 	@echo ~/exercises/cpp/
