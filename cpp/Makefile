@@ -98,6 +98,7 @@ sync:
 	@rsync -p -r -t -u -v --delete         \
     --include "IsPrimeT.cpp"               \
     --include "StrCmpT.cpp"                \
+    --include "IncrT.cpp"                  \
     --exclude "*"                          \
     ~/exercises/cpp/ .
 

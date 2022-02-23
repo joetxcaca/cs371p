@@ -1,5 +1,5 @@
 // -----------
-// Wed, 23 Feb
+// Fri, 25 Feb
 // -----------
 
 /*
@@ -99,50 +99,3 @@ crowd source checktestdata schema
 best to remove make run-all from .gitlab-ci.yml, until you're really done
 */
 
-int& pre_incr (int& r) {
-	return r += 1;}
-
-int post_incr (int& r) {
-	int v = r;
-	r += 1;
-	return v;}
-
-#define TEST0
-#define TEST1
-// #define TEST2
-// #define TEST3
-
-#ifdef TEST0
-void test0 () {
-    int i = 2;
-    int j = pre_incr(i); // like pre ++
-    assert(i == 3);
-    assert(j == 3);}
-#endif
-
-#ifdef TEST1
-void test1 () {
-    int i = 2;
-    int j = pre_incr(pre_incr(i));
-    assert(i == 4);
-    assert(j == 4);}
-#endif
-
-#ifdef TEST2
-void test2 () {
-    int i = 2;
-    int j = post_incr(i); // like post ++
-    assert(i == 3);
-    assert(j == 2);}
-#endif
-
-#ifdef TEST3
-void test3 () {
-    int i = 2;
-//  post_incr(post_incr(i)); // error: no matching function for call to 'post_incr'
-    assert(i == 2);}
-#endif
-
-/*
-you're not allowed to use ++!!!
-*/
