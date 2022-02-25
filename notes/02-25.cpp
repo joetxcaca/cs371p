@@ -97,5 +97,144 @@ Project #2: Voting
 Canvas poll
 crowd source checktestdata schema
 best to remove make run-all from .gitlab-ci.yml, until you're really done
+if you're working with a partner, you MUST join a Canvas group BEFORE you submit
 */
 
+/*
+programming contest
+*/
+
+/*
+const
+*/
+
+int i = 2;
+++i;
+cout << i; // 3
+
+const int ci;     // no, have to initialize
+const int ci = 3;
+++ci;             // no
+
+
+
+int       i  = 2;
+const int ci = 3;
+
+int* p = i;  // no
+int* p = &i;
+++*p;
+cout << i;   // 3
+
+int* q = &ci; // no
+++*q;         // can't allow that
+
+
+
+// read-only, many-location pointer
+// the target is immutable, the pointer is mutable
+
+int       i  = 2;
+const int ci = 3;
+
+const int* pc = &ci;
+++pc;                // ok, but crazy
+++*pc;               // no
+
+const int* qc;       // yes, don't have to initialize
+qc = &ci;
+
+const int* rc = &i;  // yes
+
+
+
+
+// read-write, one-location pointer
+// the target is mutable, the pointer is immutable
+
+int       i  = 2;
+const int ci = 3;
+
+int* const cp = &ci; // no
+int* const cp;       // no
+
+int* const cp = &i;
+++cp;               // no
+++*cp;              // yes
+cout << i;          // 3
+
+int* a = new int[100];
+++*a;
+++a;
+...
+delete [] a; // runtime error
+
+int* const b = new int[100];
+++*b;
+++b;  // no
+...
+delete [] b; // this now fine
+
+
+// read-only, one-location pointer
+// the target is immutable, the pointer is immutable
+
+int       i  = 2;
+const int ci = 3;
+
+const int* const cpc; // no, has to be initialized
+
+const int* const cpc = &ci; // yes
+++cpc;                      // no
+++*cpc;                     // no
+
+const int* const cqc = &i; // yes
+
+
+
+// read-write, one-location reference
+// the target is mutable, the reference is immutable
+// int& is most like int* const
+
+int       i  = 2;
+const int ci = 3;
+
+int& r;      // no, has to be initialized
+int& r = &i; // no
+int& r = i;
+++r;
+cout << i;   // 3
+cout << r;   // 3
+++*r;        // no, r is not a pointer
+
+int& s = ci; // no
+++s;         // can't let this happen
+
+
+
+// read-only, one-location reference
+// the target is immutable, the reference is immutable
+// const int& is most like const int* const
+
+int       i  = 2;
+const int ci = 3;
+
+const int& r; // no, has to be initializede
+
+const int& r = ci; // yes
+++r;               // no
+
+const int& s = i;  // yes
+++s;               // no
+
+
+
+int        i = 2;
+const int* p = &i;
+cout << i;         // 2
+cout << *p;        // 2
+
+++i;
+
+cout << i;  // 3
+cout << *p; // 3

@@ -92,6 +92,7 @@ sync:
     --include "Variables.cpp"              \
     --include "Arguments.cpp"              \
     --include "Returns.cpp"                \
+    --include "Consts.cpp"                 \
     --exclude "*"                          \
     ~/examples/cpp/ .
 	@echo ~/exercises/cpp/
