@@ -4,12 +4,11 @@ ASTYLE        := astyle
 CHECKTESTDATA := checktestdata
 CPPCHECK      := cppcheck
 DOXYGEN       := doxygen
-VALGRIND      := valgrind
 
 ifeq ($(shell uname -s), Darwin)
     BOOST    := /usr/local/include/boost
     CXX      := clang++
-    CXXFLAGS := --coverage -g -pedantic -std=c++17 -I/usr/local/include -Wall -Wextra
+    CXXFLAGS := --coverage -g -std=c++17 -Wall -Wextra -Wpedantic
     GCOV     := llvm-cov gcov
     GTEST    := /usr/local/src/googletest-master
     LDFLAGS  := -lgtest -lgtest_main
@@ -18,16 +17,16 @@ ifeq ($(shell uname -s), Darwin)
 else ifeq ($(shell uname -p), unknown)
     BOOST    := /usr/include/boost
     CXX      := g++
-    CXXFLAGS := --coverage -g -pedantic -std=c++17 -Wall -Wextra
+    CXXFLAGS := --coverage -g -std=c++17 -Wall -Wextra -Wpedantic
     GCOV     := gcov
     GTEST    := /usr/src/gtest
     LDFLAGS  := -lgtest -lgtest_main -pthread
     LIB      := /usr/lib
-    VALGRIND := valgrind
+    VALGRIND :=
 else
     BOOST    := /usr/local/opt/boost-1.67/include/boost
     CXX      := g++-11
-    CXXFLAGS := --coverage -g -pedantic -std=c++17 -Wall -Wextra
+    CXXFLAGS := --coverage -g -std=c++17 -Wall -Wextra -Wpedantic
     GCOV     := gcov-11
     GTEST    := /usr/local/include/gtest
     LDFLAGS  := -L/usr/local/opt/boost-1.77/lib/ -lgtest -lgtest_main -pthread
@@ -47,16 +46,10 @@ FILES :=                    \
     Variables
 
 %: %.cpp
+	$(CPPCHECK) $<
 	$(CXX) $(CXXFLAGS) $< -o $@ $(LDFLAGS)
 
 %.cppx: %
-	./$<
-
-%.cppy: %
-	./$<
-	$(GCOV) $<.cpp | grep -B 2 "cpp.gcov"
-
-%.cppz: %
 	$(VALGRIND) ./$<
 	$(GCOV) $<.cpp | grep -B 2 "cpp.gcov"
 
@@ -68,9 +61,6 @@ clean:
 	rm -f *.gcov
 	rm -f *.plist
 	rm -f $(FILES)
-
-docker:
-	docker run --rm -i -t -v $(PWD):/usr/gcc -w /usr/gcc gpdowning/gcc
 
 run: $(FILES:=.cppx)
 
@@ -166,7 +156,7 @@ versions:
 	@echo "% make --version"
 	@make --version
 
-ifneq ($(shell uname -s), Darwin)
+ifneq ($(VALGRIND),)
 	@echo
 	@echo "% which $(VALGRIND)"
 	@which $(VALGRIND)

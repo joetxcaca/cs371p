@@ -8,7 +8,6 @@ gcc:
     script:
     - ls -al
     - cd cpp
-    - ls -al
     - cat Makefile
     - make versions
     - ls -al
