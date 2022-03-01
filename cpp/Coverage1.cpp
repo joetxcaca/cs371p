@@ -25,12 +25,12 @@ TEST(CoverageFixture, test) {
     ASSERT_EQ(cycle_length(1), 1);}
 
 /*
-% g++-11 --coverage -pedantic -std=c++17 -O3 -Wall Coverage1.cpp -o Coverage1 -lgtest -lgtest_main -pthread
+% clang++ --coverage -g -std=c++17 -Wall -Wextra -Wpedantic Coverage1.cpp -o Coverage1
 
 
 
 % ./Coverage1
-Running main() from /usr/local/src/googletest-master/googletest/src/gtest_main.cc
+Running main() from /tmp/googletest-20210612-68642-1k2ka09/googletest-release-1.11.0/googletest/src/gtest_main.cc
 [==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from CoverageFixture
@@ -45,15 +45,13 @@ Running main() from /usr/local/src/googletest-master/googletest/src/gtest_main.c
 
 
 % ls -al Coverage1.*
--rw-r--r--@ 1 downing  staff   1502 Sep  4 14:44 Coverage1.cpp
--rw-r--r--@ 1 downing  staff   3011 Sep  4 14:43 Coverage1.cpp.gcov
-drwxr-xr-x@ 3 downing  staff     96 Sep  4 14:43 Coverage1.dSYM
--rw-r--r--@ 1 downing  staff   3712 Sep  4 14:43 Coverage1.gcda
--rw-r--r--@ 1 downing  staff  54816 Sep  4 14:43 Coverage1.gcno
+-rw-r--r--@ 1 downing  staff    1558 Sep  4 14:44 Coverage1.cpp
+-rw-r--r--@ 1 downing  staff    2678 Mar  1 16:09 Coverage1.cpp.gcov
+-rw-r--r--@ 1 downing  staff    8764 Mar  1 16:09 Coverage1.gcda
+-rw-r--r--@ 1 downing  staff  131168 Mar  1 16:09 Coverage1.gcno
 
 
-
-% gcov-11 Coverage1.cpp | grep -B 2 "cpp.gcov"
+% llvm-cov gcov Coverage1.cpp | grep -B 2 "cpp.gcov"
 File 'Coverage1.cpp'
 Lines executed:66.67% of 12
 Creating 'Coverage1.cpp.gcov'

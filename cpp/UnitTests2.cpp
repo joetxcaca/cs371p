@@ -33,7 +33,7 @@ TEST(UnitTestsFixture, test2) {
 
 /*
 % ./UnitTests2
-Running main() from /usr/local/src/googletest-master/googletest/src/gtest_main.cc
+Running main() from /tmp/googletest-20210612-68642-1k2ka09/googletest-release-1.11.0/googletest/src/gtest_main.cc
 [==========] Running 3 tests from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 3 tests from UnitTestsFixture

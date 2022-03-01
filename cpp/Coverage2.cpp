@@ -26,7 +26,7 @@ TEST(CoverageFixture, test) {
 
 /*
 % ./Coverage2
-Running main() from /usr/local/src/googletest-master/googletest/src/gtest_main.cc
+Running main() from /tmp/googletest-20210612-68642-1k2ka09/googletest-release-1.11.0/googletest/src/gtest_main.cc
 [==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from CoverageFixture
@@ -40,7 +40,7 @@ Running main() from /usr/local/src/googletest-master/googletest/src/gtest_main.c
 
 
 
-% gcov-11 Coverage2.cpp | grep -B 2 "cpp.gcov"
+% llvm-cov gcov Coverage2.cpp | grep -B 2 "cpp.gcov"
 File 'Coverage2.cpp'
 Lines executed:91.67% of 12
 Creating 'Coverage2.cpp.gcov'

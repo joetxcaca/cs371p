@@ -32,12 +32,12 @@ TEST(UnitTestsFixture, test2) {
     ASSERT_EQ(cycle_length(10), 7);}
 
 /*
-% g++-11 -pedantic -std=c++17 -O3 -Wall UnitTests1.cpp -o UnitTests1 -lgtest -lgtest_main -pthread
+% clang++ --coverage -g -std=c++17 -Wall -Wextra -Wpedantic UnitTests1.cpp -o UnitTests1
 
 
 
 % ./UnitTests1
-Running main() from /usr/local/src/googletest-master/googletest/src/gtest_main.cc
+Running main() from /tmp/googletest-20210612-68642-1k2ka09/googletest-release-1.11.0/googletest/src/gtest_main.cc
 [==========] Running 3 tests from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 3 tests from UnitTestsFixture

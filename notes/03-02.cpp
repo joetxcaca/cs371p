@@ -3,15 +3,12 @@
 // -----------
 
 /*
-Class Modality
-	online until further notice
+Class
+	MWF 1-2 pm CT
 
 Cold Calling
 	you're only called ONCE per rotation
 	it's totally fine to not know the answer, the idea is to discuss and to learn
-
-Lectures
-	MWF 1 pm
 
 Help Sessions
 	W 5-7 pm
@@ -25,6 +22,9 @@ Office Hours
 
 	Serdjan Rolovic (grad, '22)
 		Th 2-3 pm, Zoom
+
+Notes
+	these notes will be posted on GitLab
 
 Canvas
 	personal questions
