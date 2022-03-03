@@ -43,7 +43,11 @@ FILES :=                    \
     IsPrimeT                \
     Exceptions              \
     StrCmpT                 \
-    Variables
+    Variables               \
+    Arguments               \
+    Returns                 \
+    Consts                  \
+    Arrays1
 
 %: %.cpp
 	$(CPPCHECK) $<
@@ -83,6 +87,7 @@ sync:
     --include "Arguments.cpp"              \
     --include "Returns.cpp"                \
     --include "Consts.cpp"                 \
+    --include "Arrays1.cpp"                \
     --exclude "*"                          \
     ~/examples/cpp/ .
 	@echo ~/exercises/cpp/
