@@ -91,5 +91,120 @@ SOLID design
 
 /*
 arrays
+
+first significant OO design choice by C++ which is to encapsulate built-in arrays with
+user-defined array types
+	array<T>,  for arrays on the stack
+	vector<T>, for arrays on the heap
 */
 
+// -----------
+// Arrays1.cpp
+// -----------
+
+// https://en.cppreference.com/w/cpp/container/array
+
+#include <cstdio>
+
+#include <algorithm> // copy, equal
+#include <array>     // array
+#include <cassert>   // assert
+#include <iostream>  // cout, endl
+
+using namespace std;
+
+bool equal (const int* b1, const int* e1, const int* b2) {
+	// b1, e1, and b2 are all read-only, many-location pointers
+	while (b1 != e1) {
+		if (*b1 != *b2)
+			return false;
+		++b1;
+		++b2;}
+	return true;}
+
+template <typename T>
+bool equal (const T* b1, const T* e1, const T* b2) {
+	// b1, e1, and b2 are all read-only, many-location pointers
+	while (b1 != e1) {
+		if (*b1 != *b2)
+			return false;
+		++b1;
+		++b2;}
+	return true;}
+
+/*
+what are the requirements on T1 and T2
+	T1 != T2 better work
+*/
+
+template <typename T1, typename T2>
+bool equal (const T1* b1, const T1* e1, const T2* b2) {
+	// b1, e1, and b2 are all read-only, many-location pointers
+	// b1 is inclusive
+	// e1 is exclusive
+	while (b1 != e1) {
+		if (*b1 != *b2)
+			return false;
+		++b1;
+		++b2;}
+	return true;}
+
+template <typename T1, typename T2>
+bool equal (T1 b1, T1 e1, T2 b2) {
+	// b1, e1, and b2 are all read-only, many-location pointers
+	// b1 is inclusive
+	// e1 is exclusive
+	while (b1 != e1) {
+		if (*b1 != *b2)
+			return false;
+		++b1;
+		++b2;}
+	return true;}
+
+
+template <typename T>
+class list {
+	...
+	class iterator {
+		...};
+	...};
+
+int  a[] = {2, 3, 4};        // type of a is: int* const, read-write, one-location pointer
+long b[] = {2, 3, 4};
+assert(equal(a, a + 3, b)); // T1 -> int*, T2 -> long*
+
+#include <list> # list
+
+list<int>           x  = {2, 3, 4}; // like Java's LinkedList, doubly linked list
+list<int>::iterator b1 = begin(x);  // x.begin() an iterator to the first element
+list<int>::iterator e1 = end(x);    // x.end()   an iterator to one PAST the last element
+
+list<long>           y  = {2, 3, 4};
+list<long>::iterator b2 = begin(y);
+
+cout << *b; // 2
+++b;
+cout << *b; // 3
+
+cout << equal(b1, e1, b2); // T1 -> list<int>::iterator, T2 -> list<long>::iterator
+
+/*
+why don't containers directly respond to next
+rather, we must obtain an iterator and call next on that
+*/
+
+cout << equal(a + 5, a + 10, b + 15);
+
+/*
+what is the smallest that a could be? 10
+what is the smallest that b could be? 20
+*/
+
+void test5 () {
+    int a[] = {2, 3, 4};        // type of a is: int* const, read-write, one-location pointer
+    long b[] = {2, 3, 4};
+    assert(a != b);             // pointer comparison
+    assert(equal(a, a + 3, b));
+    ++b[1];
+    assert(equal(a, a + 3, begin({2, 3, 4})));
+    assert(equal(b, b + 3, begin({2, 4, 4})));}

@@ -95,6 +95,7 @@ sync:
     --include "IsPrimeT.cpp"               \
     --include "StrCmpT.cpp"                \
     --include "IncrT.cpp"                  \
+    --include "EqualT.cpp"                 \
     --exclude "*"                          \
     ~/exercises/cpp/ .
 
