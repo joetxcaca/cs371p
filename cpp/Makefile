@@ -97,6 +97,7 @@ sync:
     --include "IncrT.cpp"                  \
     --include "EqualT.cpp"                 \
     --include "CopyT.cpp"                  \
+    --include "ReverseT.cpp"               \
     --exclude "*"                          \
     ~/exercises/cpp/ .
 
