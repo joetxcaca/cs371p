@@ -82,10 +82,10 @@ please be responsive on Canvas
 */
 
 /*
-Paper #7: Liskov Substitution Principle
+Paper #8: Interface Segregation Principle
 remember to go to Perusall THROUGH Canvas
 
-this is the third of a 5-paper series
+this is the fourth of a 5-paper series
 SOLID design
 */
 
@@ -106,5 +106,118 @@ Takeaways:
 12. std::array<> IS comparable
 13. std::array<> IS copyable
 14. std::array<> IS assignable
+12. std::array<> is to a built-in array as std::string is to a built-in char array
 */
 
+int  s = ...;
+int* a = new int[s]; // heap-allocated int array, undefined, O(1)
+
+T* a = new T[s]; // if T is a built-in type, O(1), undefined values
+			     // if T is a user     type, O(n), default constructor, s times
+
+T v = ...;
+
+loop
+	a[i] = v;
+
+class Lance {
+	Lance (const Lance& rhs) {             // copy constructor
+		...}
+
+	Lance& operator = (const Lance& rhs) { // copy assignment operator
+		...}};
+
+Lance* a = new Lance[s];
+Lance  v = ...;
+
+fill(a, a + s, v); // O(n), copy assignment operator, s times
+
+vector<Lance> x(s, v); // O(n), copy constructor, s times
+
+template <typename FI, typename T>
+void fill (FI b, FI e, const T& v) {
+	while (b != e) {
+		*b = v; // copy assignment operator of T
+		++b;}}
+
+/*
+requirements on T1
+	1. !=
+	2. * (write only)
+	3. ++
+*/
+
+/*
+input
+	==, !=, * (read), ++
+output
+	* (write), ++
+forward
+	==, !=, * (read/write), ++
+bidirectional
+	==, !=, * (read/write), ++, --
+random-access
+	==, !=, * (read/write), ++, --, +, -, <, >, <=, >=
+*/
+
+// a user type T
+
+int s = ...;
+T   v = ...;
+
+T* a = new T[s]; // O(n), T()  s times
+fill(a, a+s, v); // O(n), =(T) s times
+...              // now I can use the array
+delete [] a;
+
+{
+vector<T> x(s, v); // O(n), T(T) s times
+} // the vector will automatically clean up
+
+#include <memory> // allocator
+
+allocator<T> x;          // allocator's default constructor
+T* a = x.allocate(s);    // builds the array, O(1), no initialization
+loop
+	x.construct(a+i, v); // T's copy constructor, s times
+...                      // now I can use the arra
+loop
+	x.destroy(a+i);
+x.deallocate(a, s);
+
+template <typename T, int N> // N is the number of bytes in the heap that we are managing
+class my_allocator {
+	private:
+		char a[N]; // this is the "heap"
+
+	public:
+		T* allocate (...)
+
+		void construct (...) {
+			// this is already built}
+
+		void destroy (...) {
+			// this is already built}
+
+		void deallocate (...)
+
+my_allocator<double, 100> x; // this is an allocator of doubles with a "heap" of 100 bytes
+
+[92...92] // 4 + 92 + 4 = 100
+
+double* a = x.allocate(5); // this needs 40 bytes
+
+[-40...-4044...44]
+
+/*
+pos sentinels surround a free block, 4 + 44 + 4 = 52
+neg sentinels surround a busy block, 4 + 40 + 4 = 48
+
+52 + 48 = 100
+*/
+
+x.deallocate(a, s);
+
+[40...4044...44] // don't want two free blocks in a row, instead we join them
+
+[92...92] // 4 + 92 + 4 = 100

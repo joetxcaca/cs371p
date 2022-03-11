@@ -88,6 +88,7 @@ sync:
     --include "Returns.cpp"                \
     --include "Consts.cpp"                 \
     --include "Arrays1.cpp"                \
+    --include "Allocator.cpp"              \
     --exclude "*"                          \
     ~/examples/cpp/ .
 	@echo ~/exercises/cpp/
@@ -98,6 +99,7 @@ sync:
     --include "EqualT.cpp"                 \
     --include "CopyT.cpp"                  \
     --include "ReverseT.cpp"               \
+    --include "FillT.cpp"                  \
     --exclude "*"                          \
     ~/exercises/cpp/ .
 
