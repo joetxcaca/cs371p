@@ -109,3 +109,225 @@ Takeaways:
 12. std::array<> is to a built-in array as std::string is to a built-in char array
 */
 
+/*
+Integrated 5-Year CS BS/MS Program
+https://www.cs.utexas.edu/undergraduate/academics/curriculum-degree-plans/5-year-cs-bsms/
+Info Session
+Tue, 29 Mar, 6 pm
+Zoom
+*/
+
+/*
+P3 moved to Tue, 29 Mar
+iterators
+iteration
+arrays2
+*/
+
+
+struct A {
+    A () {
+        cout << "A() ";}
+    A (int) {
+        cout << "A(int) ";}
+    A (const A&) {
+        cout << "A(A) ";}
+    A& operator = (const A&) {
+        cout << "=(A) ";
+        return *this;}
+    ~A () {
+        cout << "~A() ";}};
+
+void test4 () {
+    allocator<A> x;
+    A            v = 3;
+    A*           a = x.allocate(2);
+    a[0] = v;                       // copy assignment, no good!!!
+    x.construct(a, v);              // copy constructor
+
+    A            w = 4;
+    a[0] = w;                       // NOW, this would be ok
+
+    x.destroy(a);
+    x.deallocate(a, 2);}
+
+/*
+allocator project
+
+managing an array of char (bytes)
+
+defining blocks (free or busy) with the use of matching int sentinels at both ends of the block
+free blocks have pos sentinels
+busy blocks have neg sentinels
+*/
+
+    private:
+        // ----
+        // data
+        // ----
+
+        char a[N];
+
+        /**
+         * O(1) in space
+         * O(n) in time
+         * <your documentation>
+         */
+        bool valid () const {
+            // <your code>
+            // <use iterators>
+            return true;}
+
+    public:
+        // -----------
+        // constructor
+        // -----------
+
+        /**
+         * O(1) in space
+         * O(1) in time
+         * throw a bad_alloc exception, if N is less than sizeof(T) + (2 * sizeof(int))
+         */
+        my_allocator () {
+            (*this)[0] = 0;                                   // no
+            (*this)[0]               = N - (2 * sizeof(int));
+            (*this)[N - sizeof(int)] = N - (2 * sizeof(int));
+            // <your code>
+            assert(valid());}
+
+        /**
+         * O(1) in space
+         * O(n) in time
+         * after allocation there must be enough space left for a valid block
+         * the smallest allowable block is sizeof(T) + (2 * sizeof(int))
+         * choose the first block that fits
+         * throw a bad_alloc exception, if n is invalid
+         */
+        pointer allocate (size_type) {
+            // <your code>
+            assert(valid());
+            return nullptr;}             // replace!
+
+        // ---------
+        // construct
+        // ---------
+
+        /**
+         * O(1) in space
+         * O(1) in time
+         */
+        void construct (pointer p, const_reference v) {
+            new (p) T(v);                               // this is correct and exempt
+            assert(valid());}                           // from the prohibition of new
+
+        // ----------
+        // deallocate
+        // ----------
+
+        /**
+         * O(1) in space
+         * O(1) in time
+         * after deallocation adjacent free blocks must be coalesced
+         * throw an invalid_argument exception, if p is invalid
+         * <your documentation>
+         */
+        void deallocate (pointer, size_type) {
+            // <your code>
+            assert(valid());}
+
+        // -------
+        // destroy
+        // -------
+
+        /**
+         * O(1) in space
+         * O(1) in time
+         */
+        void destroy (pointer p) {
+            p->~T();               // this is correct
+            assert(valid());}
+
+        // -----------
+        // operator []
+        // -----------
+
+        /**
+         * O(1) in space
+         * O(1) in time
+         */
+        int& operator [] (int i) {
+            return *reinterpret_cast<int*>(&a[i]);}
+
+        /**
+         * O(1) in space
+         * O(1) in time
+         */
+        const int& operator [] (int i) const {
+            return *reinterpret_cast<const int*>(&a[i]);}
+
+struct A {
+	int _i;
+
+	void f () {
+		++_i;}};
+
+A x;
+x.f();
+
+const A cx;
+cx.f();     // no
+
+
+
+struct A {
+	int _i;
+
+	void f () {
+		++_i;}
+
+	void g () const {
+		++_i;         // no
+		cout << i;}};
+
+A x;
+x.g();
+
+const A cx;
+cx.g();
+
+
+struct A {
+	int _i;
+
+	void h () {
+		++_i;}
+
+	void h () const {
+		++_i;         // no
+		cout << i;}};
+
+A x;
+x.h(); // non-const h()
+
+const A cx;
+cx.h();     // const h()
+
+/*
+100 bytes
+*/
+
+92...92
+
+allocator<double> x;
+double* a = x.allocate(5); // 40 + 8 = 48
+
+48       52
+-40...-4044...44
+
+double* b = x.allocate(5); // 40 + 8 = 48
+
+48       48       4
+-40...-40-40...-40... // no good, can't leave behind a useless free block
+
+48       52
+-40...-40-44...-44

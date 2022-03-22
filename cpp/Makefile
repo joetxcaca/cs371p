@@ -66,6 +66,9 @@ clean:
 	rm -f *.plist
 	rm -f $(FILES)
 
+docker:
+	docker run --rm -i -t -v $(PWD):/usr/gcc -w /usr/gcc gpdowning/gcc
+
 run: $(FILES:=.cppx)
 
 sync:
