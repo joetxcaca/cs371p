@@ -82,10 +82,10 @@ please be responsive on Canvas
 */
 
 /*
-Paper #8: Interface Segregation Principle
+Paper #9: Dependency Inversion Principle
 remember to go to Perusall THROUGH Canvas
 
-this is the fourth of a 5-paper series
+this is the fifth of a 5-paper series
 SOLID design
 */
 
