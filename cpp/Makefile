@@ -47,7 +47,10 @@ FILES :=                    \
     Arguments               \
     Returns                 \
     Consts                  \
-    Arrays1
+    Arrays1                 \
+    Allocator               \
+    Iterators               \
+    Arrays2
 
 %: %.cpp
 	$(CPPCHECK) $<
@@ -92,6 +95,8 @@ sync:
     --include "Consts.cpp"                 \
     --include "Arrays1.cpp"                \
     --include "Allocator.cpp"              \
+    --include "Iterators.cpp"              \
+    --include "Arrays2.cpp"                \
     --exclude "*"                          \
     ~/examples/cpp/ .
 	@echo ~/exercises/cpp/
