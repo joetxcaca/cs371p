@@ -120,6 +120,163 @@ Zoom
 /*
 P3 moved to Tue, 29 Mar
 iterators
-arrays2
+arrays2, test 6
+deque
+list
+stack
+queue
+priority_queue
 */
 
+// -----------
+// Arrays2.c++
+// -----------
+
+#include <cstdio>
+
+#include <algorithm> // copy, count, equal, fill
+#include <cassert>   // assert
+#include <cstddef>   // ptrdiff_t, size_t
+#include <iostream>  // cout, endl
+#include <memory>    // unique_ptr
+#include <string>    // string
+#include <vector>    // vector
+
+using namespace std;
+
+
+struct Mammal {
+    int i;
+
+    string f () {
+        return "A::f";}};
+
+struct Tiger : Mammal { // child of A
+    int j;
+
+    string f () {
+        return "B::f";}};
+
+/*
+const_cast
+reinterpret_cast
+static_cast
+one more coming
+*/
+
+void test6 () {
+//  Tiger*  const a = new Mammal[10];     // error: invalid conversion from ‘A*’ to ‘B*’
+    Mammal* const a = new Tiger[10];     // dangerous
+    assert(a[0].f() == "A::f");
+//  assert(a[1].f() == "A::f"); // undefined
+//  delete [] a;                // undefined
+    Tiger* b = static_cast<Tiger*>(a);  // clang-check warning: Potential leak of memory pointed to by 'a'
+    assert(b[1].f() == "B::f");
+    delete [] b;}               // ~B::B() and ~A::A()
+
+Tiger   x(...);
+Mammal* p = &x; // see mammal properties
+
+void test7 () {
+    const ptrdiff_t   s = 10;
+    const int         v =  2;
+    unique_ptr<int[]> a(new int[s]); // automatically manage the memory and automatically delete
+    fill(a.get(), a.get() + s, v);
+    assert(count(a.get(), a.get() + s, v) == s);
+    assert(a.get()[1] == v);
+    f(a.get());
+    assert(a.get()[1] == v + 2);}
+
+void test8 () {
+    const size_t s = 10;
+    const int    v =  2;
+    vector<int>  x(s, v);    // O(n), T(T), s times
+    assert(x.size() == s);
+    assert(x[0]     == v);   // index
+    vector<int> y(x);        // copy, O(n), T(T), s times
+    assert( x    ==  y);     // compare
+    assert(&x[1] != &y[1]);
+    vector<int> z(2 * s, v);
+    x = z;                   // assign and resize
+    assert( x    ==  z);
+    assert(&x[1] != &z[1]);}
+
+void h1 (vector<int>& y) {
+    vector<int>::iterator p = begin(y);
+    ++p;
+    ++p[0];
+    ++*p;}
+
+void test9 () {
+    vector<int> x = {2, 3, 4};
+    h1(x);
+    assert(equal(begin(x), end(x), begin({2, 5, 4})));}
+
+void h2 (vector<int> y) {
+    vector<int>::iterator p = begin(y);
+    ++p;
+    ++p[0];
+    ++*p;}
+
+void test10 () {
+    vector<int> x = {2, 3, 4};
+    h2(x);
+    assert(equal(begin(x), end(x), begin({2, 3, 4})));}
+
+int main () {
+    cout << "Arrays2.c++" << endl;
+    test1();
+    test2();
+    test3();
+    test4();
+    test5();
+    test6();
+    test7();
+    test8();
+    test9();
+    test10();
+    cout << "Done." << endl;
+    return 0;}
+
+/*
+cost of adding to the front
+cost of adding to the middle
+cost of adding to the back
+
+cost of removing from the front
+cost of removing from the middle
+cost of removing from the back
+
+cost of indexing
+*/
+
+/*
+vector
+front-loaded array on the heap
+like Java's ArrayList
+
+cost of adding to the front:  O(n)
+cost of adding to the middle: O(n)
+cost of adding to the back:   amortized O(1)
+
+cost of removing from the front:  O(n)
+cost of removing from the middle: O(n)
+cost of removing from the back:   O(1)
+
+cost of indexing: O(1)
+*/
+
+vector<int> x(10, 2);
+cout << x.size();      // 10
+cout << x.capacity();  // 10
+
+vector<int>::iterator b = begin(x);
+int*                  b = begin(x);
+
+cout << *b; // 2
+
+x.push_back(3);
+cout << x.size();      // 11
+cout << x.capacity();  // 20
+
+cout << *b; // undefined!!!!
