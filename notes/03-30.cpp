@@ -107,6 +107,19 @@ Takeaways:
 13. std::array<> IS copyable
 14. std::array<> IS assignable
 12. std::array<> is to a built-in array as std::string is to a built-in char array
+13. built-in heap arrays are always passed by address
+14. built-in heap arrays are DO NOT know their size
+15. built-in heap arrays are NOT comparable
+16. built-in heap arrays are NOT copyable
+17. built-in heap arrays are NOT assignable
+18. built-in heap arrays are NOT resizable
+19. std::vector<> DOES know its size
+20. std::vector<> IS comparable
+21. std::vector<> IS copyable
+22. std::vector<> IS assignable
+23. std::vector<> IS resizable
+24. std::vector<> is to a built-in heap array as std::array is to a built-in stack array
+25. std::vector<> resizing will invalidate old iterators, pointers, and references
 */
 
 /*
