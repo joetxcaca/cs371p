@@ -82,11 +82,8 @@ please be responsive on Canvas
 */
 
 /*
-Paper #9: Dependency Inversion Principle
+Paper #10: Why getter and setter methods are evil
 remember to go to Perusall THROUGH Canvas
-
-this is the fifth of a 5-paper series
-SOLID design
 */
 
 /*
@@ -123,7 +120,6 @@ Takeaways:
 */
 
 /*
-P3 moved to Tue, 29 Mar
 deque
 list
 stack
@@ -131,3 +127,212 @@ queue
 priority_queue
 */
 
+/*
+cost of adding to the front
+cost of adding to the middle
+cost of adding to the back
+
+cost of removing from the front
+cost of removing from the middle
+cost of removing from the back
+
+cost of indexing
+*/
+
+/*
+vector
+front-loaded array on the heap
+like Java's ArrayList
+
+cost of adding to the front:  O(n)
+cost of adding to the middle: O(n)
+cost of adding to the back:   amortized O(1)
+
+cost of removing from the front:  O(n)
+cost of removing from the middle: O(n)
+cost of removing from the back:   O(1)
+
+cost of indexing: O(1)
+
+vector will NOT respond to push_front() or remove_front()
+*/
+
+vector<int> x(10, 2);
+cout << x.size();      // 10
+cout << x.capacity();  // 10
+
+vector<int>::iterator b = begin(x);
+int*                  b = begin(x);
+
+cout << *b; // 2
+
+x.push_back(3);
+cout << x.size();      // 11
+cout << x.capacity();  // 20
+
+cout << *b; // undefined!!!!
+
+/*
+deque
+middle-loaded array of arrays on the heap
+like Java's ArrayDeque
+
+cost of adding to the front:  amortized O(1)
+cost of adding to the middle: O(n)
+cost of adding to the back:   amortized O(1)
+
+cost of removing from the front:  O(1)
+cost of removing from the middle: O(n)
+cost of removing from the back:   O(1)
+
+cost of indexing: O(1), much more expensive because other +, /, %
+*/
+
+/*
+deque
+	1. asymmetry of vector
+	2. the invalidation of iterators, pointers, and references with the vector grows
+middle-loaded array of arrays
+*/
+
+// 7 rows, 5 cols
+// size of 9, capacity of 35
+// not full
+
+# .....
+# .....
+# ....*
+# *****
+# **...
+# .....
+# .....
+
+//
+
+deque x(10, 2)
+cout << x.size();     // 10
+cout << x.capacity(); // no
+
+// full deque
+
+deque x(15, 2)
+cout << x.size(); // 15
+cout << x[7];     // 7/5 that gets me the row, 7%5 that gets me the col
+
+# 22222
+# 22222
+# 22222
+
+x.push_back(3)
+
+# .....
+# 22222
+# 22222
+# 22222
+# 3....
+# .....
+
+deque<int> x(10, 2);
+cout << x.size();      // 10
+
+deque<int>::iterator b = begin(x);
+int*                 b = begin(x); // no!!!!!!
+
+cout << *b; // 2
+
+x.push_back(3);
+cout << x.size();      // 11
+
+cout << *b; // 2!!!!
+
+
+/*
+list
+doubly-linked list
+like Java's LinkedList
+
+cost of adding to the front:  O(1)
+cost of adding to the middle: O(1)
+cost of adding to the back:   O(1)
+
+cost of removing from the front:  O(1)
+cost of removing from the middle: O(1)
+cost of removing from the back:   O(1)
+
+cost of indexing: not available
+*/
+
+/*
+Java
+Collection
+List
+	get(int)
+ArrayList  both implement List, get(), O(1)
+LinkedList both implement List, get(), O(n)
+*/
+
+
+/*
+three workhorses
+	vector
+	deque
+	list
+*/
+
+/*
+container adapters
+	stack
+	queue
+	priority_queue
+*/
+
+struct Stack : Vector { // Stack a child of Vector
+	push  -> push_back
+	pop   -> pop_back
+	top   -> back
+	size  -> size
+	empty -> empty
+	};
+
+/*
+Java
+stack IS a child of vector!!!!!
+*/
+
+/*
+because we don't want stack to do anything else is bad to inherit from vector
+*/
+
+template <typename T, typename C = deque<T>>
+class Stack {
+	private:
+		C _c;
+
+	public:
+		void push (const T& v) {
+			_c.push_back(v);}
+
+		pop   -> pop_back
+		top   -> back
+		size  -> size
+		empty -> empty
+	}
+
+/*
+two forms of reuse
+	1. inheritance, reuse code, reuse interface
+	2. composition, reuse code
+*/
+
+/*
+vector is faster at indexing than deque
+vector is slower at growing  than deque
+*/
+
+stack<int> x; // yes
+
+stack<int, list<int>> y; // yes
+
+stack<int, deque<int>> y; // yes
+
+stack<double, list<double>> t;
