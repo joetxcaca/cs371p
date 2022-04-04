@@ -50,7 +50,8 @@ FILES :=                    \
     Arrays1                 \
     Allocator               \
     Iterators               \
-    Arrays2
+    Arrays2                 \
+    StackT
 
 %: %.cpp
 	$(CPPCHECK) $<
@@ -108,6 +109,7 @@ sync:
     --include "CopyT.cpp"                  \
     --include "ReverseT.cpp"               \
     --include "FillT.cpp"                  \
+    --include "StackT.cpp"                 \
     --exclude "*"                          \
     ~/exercises/cpp/ .
 

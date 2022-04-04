@@ -1,5 +1,5 @@
 // -----------
-// Mon,  4 Apr
+// Wed,  6 Apr
 // -----------
 
 /*
@@ -121,65 +121,9 @@ Takeaways:
 
 /*
 stack
+member initialization list
+const_cast
+friend
 queue
 priority_queue
 */
-
-
-template <typename T, typename C = deque<T>>
-class Stack {
-	private:
-		C _c;
-
-	public:
-		void push (const T& v) {
-			_c.push_back(v);}
-
-		pop   -> pop_back
-
-		const T& top () const {
-			...} // might be nice these two tops to reuse each other
-
-		T& top () {
-			...} // might be nice these two tops to reuse each other
-
-		size_t size () const {
-			return _c.size();}
-
-		empty -> empty
-	}
-
-/*
-two forms of reuse
-	1. inheritance, reuse code, reuse interface
-	2. composition, reuse code
-*/
-
-/*
-vector is faster at indexing than deque
-vector is slower at growing  than deque
-*/
-
-stack<int> x; // yes
-
-stack<int, list<int>> y; // yes
-
-stack<int, deque<int>> y; // yes
-
-stack<double, vector<double>> t;
-
-void f (const stack<int>& y) {
-	cout << y.size();
-	cout << y.top();  // 3
-	y.top() = 4;}     // no
-
-stack<int> x;
-...
-f(x);
-
-stack<int> x;
-x.push_back(2);
-x.push_back(3);
-cout << x.top(); // 3
-f(x);
-x.top() = 4;     // yes
