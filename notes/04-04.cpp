@@ -82,7 +82,7 @@ please be responsive on Canvas
 */
 
 /*
-Paper #9: Why getter and setter methods are evil
+Paper #10: Why getter and setter methods are evil
 remember to go to Perusall THROUGH Canvas
 */
 
