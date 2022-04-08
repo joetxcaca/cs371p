@@ -41,6 +41,7 @@ Takeaways:
 26. use member initialization list to avoid unwanted default constructor call
 27. use const_cast for reuse
 28. use explicit to turn off implicit type conversion
+29. make symmetric non-member friend functions
 */
 
 /*
@@ -49,3 +50,132 @@ friend
 map
 */
 
+class string {
+	private:
+		...
+
+	public:
+		string (const char*) {...} // construct AND type converter
+
+	...};
+
+void f (string t) {
+	...}
+
+string s("abc");
+f(s);            // yes
+f("abc");        // yes, implicit conversion
+
+template <typenane T>
+class vector {
+	private:
+		...
+
+	public:
+		explicit vector (size_t s) {...} // size constructor, ONLY a constructor
+
+		vector (initializer_list<T> ll) {...}
+
+	...};
+
+void g (vector<int> y) {
+	...}
+
+vector<int> x(10); // size constructor
+g(x);              // yes
+g(10);             // no
+
+vector<int> y(10000); // explicit construction of a large data structure
+g(10000);             // IMPLICIT
+
+vector<int> z({2, 3, 4, 5, 6, 7}); // initializer_list constructor
+g({2, 3, 4, 5, 6, 7})
+
+class string {
+	private:
+		...
+
+	public:
+		string (const char*) {...} // construct AND type converter
+
+		bool operator == (const string& ) {
+			...}
+
+	...};
+
+x.f(...); // method
+
+string s("abc");
+string t("abc");
+cout << (s == t); // s.operator==(t)
+
+cout << (s == "abc"); // s.operator==("abc")
+
+cout << ("abc" == s); // "abc". // no
+
+
+
+
+class string {
+	friend bool operator == (const string&, const string&);
+
+	private:
+		char* _a; // this is the internal array of char on the heap
+
+	public:
+		string (const char*) {...} // construct AND type converter
+
+	...};
+
+
+bool operator == (const string& lhs, const string& rhs) {
+	...}
+
+
+string s("abc");
+string t("abc");
+cout << (s == t); // operator==(s, t) // yes
+
+cout << (s == "abc"); // operator==(s, "abc") // yes
+
+cout << ("abc" == s); // operator==("abc", s) // yes
+
+
+
+
+class string {
+	 friend bool operator == (const string& lhs, const string& rhs) {
+		...}
+
+	private:
+		char* _a; // this is the internal array of char on the heap
+
+	public:
+		string (const char*) {...} // construct AND type converter
+
+	...};
+
+
+/*
+symmetric operators, non-member friend functions
+	==
+	!=
+	+
+	-
+	*
+	/
+	%
+	<
+	>
+	<=
+	>=
+*/
+
+/*
+non-symmetric operators, remain non-friend member functions
+	+=
+	-=
+	*=
+	/=
+	%=
+*/
