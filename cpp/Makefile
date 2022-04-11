@@ -51,7 +51,9 @@ FILES :=                    \
     Allocator               \
     Iterators               \
     Arrays2                 \
-    StackT
+    StackT                  \
+    Iteration               \
+    Initializations
 
 %: %.cpp
 	$(CPPCHECK) $<
@@ -98,6 +100,8 @@ sync:
     --include "Allocator.cpp"              \
     --include "Iterators.cpp"              \
     --include "Arrays2.cpp"                \
+    --include "Iteration.cpp"              \
+    --include "Initializations.cpp"        \
     --exclude "*"                          \
     ~/examples/cpp/ .
 	@echo ~/exercises/cpp/
