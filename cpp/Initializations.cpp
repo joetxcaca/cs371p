@@ -187,7 +187,7 @@ struct F {
     F             ()         = default; // default constructor
     F             (const F&) = default; // copy constructor
     F& operator = (const F&) = default; // copy assignment operator
-    ~F            ()          = default; // destructor
+    ~F            ()         = default; // destructor
 
     F (int) {
         c += 2;}
