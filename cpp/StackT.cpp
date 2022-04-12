@@ -90,7 +90,7 @@ class my_stack {
             return _c.back();}
 
         const_reference top () const {
-            return _c.back();}};
+            return const_cast<my_stack*>(this)->top();}};
 
 template <typename T>
 struct StackFixture : Test {
