@@ -44,7 +44,6 @@ void test2 () {
 
 struct A {
     int i;
-    int j;
 
     A             ()         = default;   // default constructor
     A             (const A&) = default;   // copy constructor
@@ -52,12 +51,14 @@ struct A {
     ~A            ()         = default;}; // destructor
 
 void test3 () {
-//  A x(2, 3);    // error: no matching function for call to 'A::A(int, int)'
+//  A x(2);      // error: no matching constructor for initialization of 'A'
 
-    A z{2, 3};
+//  A y = 2;     // error: no viable conversion from 'int' to 'A'
+
+    A z{2};
     assert(&z);
 
-    A t = {2, 3};
+    A t = {2};
     assert(&t);}
 
 
@@ -66,27 +67,30 @@ struct B {
     static int c;
 
     int i;
-    int j;
 
     B             ()         = default; // default constructor
     B             (const B&) = default; // copy constructor
     B& operator = (const B&) = default; // copy assignment operator
     ~B            ()         = default; // destructor
 
-    B (int, int) {
+    B (int) {
         ++c;}};
 
 int B::c = 0;
 
 void test4 () {
-    B x(2, 3);          // B(int, int)
+    B x(2);             // B(int)
     assert(B::c == 1);
 
-    B z{2, 3};          // B(int, int)
-    assert(B::c == 2);
+    B y = 2;
+    assert(&y);
+    assert(B::c == 2);  // B(int)
 
-    B t = {2, 3};       // B(int, int)
-    assert(B::c == 3);}
+    B z{2}   ;          // B(int)
+    assert(B::c == 3);
+
+    B t = {2};          // B(int)
+    assert(B::c == 4);}
 
 
 
@@ -94,26 +98,27 @@ struct C {
     static int c;
 
     int i;
-    int j;
 
     C             ()         = default; // default constructor
     C             (const C&) = default; // copy constructor
     C& operator = (const C&) = default; // copy assignment operator
     ~C            ()         = default; // destructor
 
-    explicit C (int, int) {
+    explicit C (int) {
         ++c;}};
 
 int C::c = 0;
 
 void test5 () {
-    C x(2, 3);         // C(int, int)
+    C x(2);            // C(int)
     assert(C::c == 1);
 
-    C z{2, 3};         // C(int, int)
+//  C y = 2;           // error: no viable conversion from 'int' to 'C'
+
+    C z{2};            // C(int)
     assert(C::c == 2);
 
-//  C t = {2, 3};      // error: converting to 'C' from initializer list would use explicit constructor 'C::C(int, int)'
+//  C t = {2};         // error: chosen constructor is explicit in copy-initialization
     }
 
 
@@ -122,7 +127,6 @@ struct D {
     static int c;
 
     int i;
-    int j;
 
     D             ()         = default; // default constructor
     D             (const D&) = default; // copy constructor
@@ -135,12 +139,14 @@ struct D {
 int D::c = 0;
 
 void test6 () {
-//  D x(2, 3);          // error: no matching function for call to 'D::D(int)'
+//  D x(2);             // error: no matching constructor for initialization of 'D'
 
-    D z{2, 3};          // D(initializer_list<int>)
+//  D y = 2;            // error: no viable conversion from 'int' to 'D'
+
+    D z{2};             // D(initializer_list<int>)
     assert(D::c == 1);
 
-    D t = {2, 3};       // D(initializer_list<int>)
+    D t = {2};          // D(initializer_list<int>)
     assert(D::c == 2);}
 
 
@@ -149,7 +155,6 @@ struct E {
     static int c;
 
     int i;
-    int j;
 
     E             ()         = default; // default constructor
     E             (const E&) = default; // copy constructor
@@ -162,12 +167,14 @@ struct E {
 int E::c = 0;
 
 void test7 () {
-//  E x(2, 3);    // error: no matching function for call to 'D::D(int)'
+//  E x(2);            // error: no matching constructor for initialization of 'E'
 
-    E z{2, 3};    // E(initializer_list<int>)
-    assert(&z);
+//  E y = 2;           // error: no viable conversion from 'int' to 'E'
 
-//  E t = {2, 3}; // error: converting to 'E' from initializer list would use explicit constructor 'E::E(std::initializer_list<int>)'
+    E z{2};            // E(initializer_list<int>)
+    assert(E::c == 1);
+
+//  E t = {2};         // error: chosen constructor is explicit in copy-initialization
     }
 
 
@@ -176,7 +183,6 @@ struct F {
     static int c;
 
     int i;
-    int j;
 
     F             ()         = default; // default constructor
     F             (const F&) = default; // copy constructor
@@ -187,10 +193,7 @@ struct F {
         c += 2;}
 
     F (initializer_list<int>) {
-        c += 3;}
-
-    bool operator == (const F&) {
-    	return true;}};
+        c += 3;}};
 
 int F::c = 0;
 
@@ -199,6 +202,7 @@ void test8 () {
     assert(F::c == 2);
 
     F y = 2;             // F(int)
+    assert(&y);
     assert(F::c == 4);
 
     F z{2};              // F(initializer_list<int>)
