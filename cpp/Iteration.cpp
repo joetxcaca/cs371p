@@ -62,15 +62,6 @@ void test5 () {
     assert(equal(a, a + 3, begin({2, 3, 4})));}
 
 void test6 () {
-    int a[] = {2, 3, 4};
-    int s   = 0;
-    for (int v : a) {
-        s += v;
-        ++v;}                                   // ?
-    assert(s == 9);
-    assert(equal(a, a + 3, begin({2, 3, 4})));}
-
-void test7 () {
     int  a[] = {2, 3, 4};
     int  s   = 0;
     int* b   = begin(a);
@@ -78,8 +69,16 @@ void test7 () {
     while (b != e) {
         int v = *b;
         s += v;
-        ++v;                                    // ?
         ++b;}
+    assert(s == 9);
+    assert(equal(a, a + 3, begin({2, 3, 4})));}
+
+void test7 () {
+    int a[] = {2, 3, 4};
+    int s   = 0;
+    for (int v : a) {
+        s += v;
+        ++v;}                                   // ?
     assert(s == 9);
     assert(equal(a, a + 3, begin({2, 3, 4})));}
 
