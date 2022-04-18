@@ -54,7 +54,8 @@ FILES :=                    \
     StackT                  \
     Iteration               \
     Initializations         \
-    Vector1T
+    Vector1T                \
+    Vector2T
 
 %: %.cpp
 	$(CPPCHECK) $<
@@ -116,6 +117,7 @@ sync:
     --include "FillT.cpp"                  \
     --include "StackT.cpp"                 \
     --include "Vector1T.cpp"               \
+    --include "Vector2T.cpp"               \
     --exclude "*"                          \
     ~/exercises/cpp/ .
 

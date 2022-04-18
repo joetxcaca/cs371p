@@ -45,7 +45,7 @@ Takeaways:
 */
 
 /*
-vector move constructor
-vector move assignment
+function overloading
+move
 */
 
