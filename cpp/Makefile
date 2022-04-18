@@ -55,7 +55,8 @@ FILES :=                    \
     Iteration               \
     Initializations         \
     Vector1T                \
-    Vector2T
+    Vector2T                \
+    FunctionOverloading
 
 %: %.cpp
 	$(CPPCHECK) $<
@@ -104,6 +105,7 @@ sync:
     --include "Arrays2.cpp"                \
     --include "Iteration.cpp"              \
     --include "Initializations.cpp"        \
+    --include "FunctionOverloading.cpp"    \
     --exclude "*"                          \
     ~/examples/cpp/ .
 	@echo ~/exercises/cpp/
