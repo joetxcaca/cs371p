@@ -56,7 +56,9 @@ FILES :=                    \
     Initializations         \
     Vector1T                \
     Vector2T                \
-    FunctionOverloading
+    FunctionOverloading     \
+    Move                    \
+    Vector3T
 
 %: %.cpp
 	$(CPPCHECK) $<
@@ -106,6 +108,7 @@ sync:
     --include "Iteration.cpp"              \
     --include "Initializations.cpp"        \
     --include "FunctionOverloading.cpp"    \
+    --include "Move.cpp"                   \
     --exclude "*"                          \
     ~/examples/cpp/ .
 	@echo ~/exercises/cpp/
@@ -120,6 +123,7 @@ sync:
     --include "StackT.cpp"                 \
     --include "Vector1T.cpp"               \
     --include "Vector2T.cpp"               \
+    --include "Vector3T.cpp"               \
     --exclude "*"                          \
     ~/exercises/cpp/ .
 
