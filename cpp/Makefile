@@ -124,6 +124,7 @@ sync:
     --include "Vector1T.cpp"               \
     --include "Vector2T.cpp"               \
     --include "Vector3T.cpp"               \
+    --include "Shapes1T.cpp"               \
     --exclude "*"                          \
     ~/exercises/cpp/ .
 
