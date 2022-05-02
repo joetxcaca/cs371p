@@ -58,7 +58,9 @@ FILES :=                    \
     Vector2T                \
     FunctionOverloading     \
     Move                    \
-    Vector3T
+    Vector3T                \
+    Shapes1T                \
+    Shapes2T
 
 %: %.cpp
 	$(CPPCHECK) $<
@@ -125,6 +127,7 @@ sync:
     --include "Vector2T.cpp"               \
     --include "Vector3T.cpp"               \
     --include "Shapes1T.cpp"               \
+    --include "Shapes2T.cpp"               \
     --exclude "*"                          \
     ~/exercises/cpp/ .
 
